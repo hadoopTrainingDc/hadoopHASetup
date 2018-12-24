@@ -1,0 +1,47 @@
+---
+- name: Downloading and unpacking HADOOP
+  hosts: hadoop
+  become: true
+  become_user: hadoopuser
+  gather_facts: false
+  tasks:
+  - name: Create HA directory
+    file:
+      path: ~hadoopuser/HA
+      state: directory
+  - name: Downloading Distfiles
+    get_url:
+      url: '{{ item }}'
+      dest: ~hadoopuser
+    with_items:
+      - https://archive.apache.org/dist/hadoop/core/hadoop-2.5.2/hadoop-2.5.2.tar.gz
+      - https://archive.apache.org/dist/hbase/1.2.3/hbase-1.2.3-bin.tar.gz
+      - https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
+  - name: Unpacking Hadoop
+    unarchive:
+      src: '~hadoopuser/{{ item.name }}.tar.gz'
+      dest: ~hadoopuser/HA
+      remote_src: true
+      owner: hadoopuser
+      group: hadoopuser
+      creates: ~hadoopuser/HA/{{ item.target }}
+    with_items:
+      - {name: 'hadoop-2.5.2', target: 'hadoop'}
+      - {name: 'hbase-1.2.3-bin', target: 'hbase'}
+      - {name: 'zookeeper-3.4.9', target: 'zookeeper'}
+  - name: Rename dir
+    command: 'mv ~hadoopuser/HA/{{ item.name }} ~hadoopuser/HA/{{ item.target }}'
+    args:
+      creates: ~hadoopuser/HA/{{ item.target }}
+    with_items:
+      - {name: 'hadoop-2.5.2', target: 'hadoop'}
+      - {name: 'hbase-1.2.3', target: 'hbase'}
+      - {name: 'zookeeper-3.4.9', target: 'zookeeper'}
+  - name: Clean downloaded
+    file:
+      path: '~hadoopuser/{{ item.name }}.tar.gz'
+      state: absent
+    with_items:
+      - {name: 'hadoop-2.5.2', target: 'hadoop'}
+      - {name: 'hbase-1.2.3-bin', target: 'hbase'}
+      - {name: 'zookeeper-3.4.9', target: 'zookeeper'}
