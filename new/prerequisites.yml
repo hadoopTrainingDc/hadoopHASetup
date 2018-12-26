@@ -6,7 +6,11 @@
   tasks:
   - name: Installing Java
     yum:
-      name: java-1.8.0
+      name: java-1.8.0,java-1.8.0-openjdk-devel
+      state: latest
+  - name: Installing rsync
+    yum:
+      name: rsync
       state: latest
   - name: Installing Midnight Commander
     yum:
@@ -18,3 +22,10 @@
       shell: '/usr/bin/bash'
       password: $1$abC$bnHkUrTarL4ffXu4Hu9Y1.
       create_home: yes
+  - name: Setting env vars script
+    synchronize:
+      src:  'hadoop-env.sh'
+      dest: '/etc/profile.d/hadoop-env.sh'
+  - name: Setting hostname
+    hostname:
+      name: '{{inventory_hostname }}'

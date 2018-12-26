@@ -9,19 +9,10 @@
     file:
       path: ~hadoopuser/HA
       state: directory
-  - name: Downloading Distfiles
-    get_url:
-      url: '{{ item }}'
-      dest: ~hadoopuser
-    with_items:
-      - https://archive.apache.org/dist/hadoop/core/hadoop-2.5.2/hadoop-2.5.2.tar.gz
-      - https://archive.apache.org/dist/hbase/1.2.3/hbase-1.2.3-bin.tar.gz
-      - https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
   - name: Unpacking Hadoop
     unarchive:
-      src: '~hadoopuser/{{ item.name }}.tar.gz'
+      src: '~/hadoop_distfiles/{{ item.name }}.tar.gz'
       dest: ~hadoopuser/HA
-      remote_src: true
       owner: hadoopuser
       group: hadoopuser
       creates: ~hadoopuser/HA/{{ item.target }}
