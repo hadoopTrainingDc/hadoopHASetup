@@ -5,7 +5,7 @@ hb17 ansible_host=192.168.1.67
 hb18 ansible_host=192.168.1.68
 
 [hadoop:vars]
-ansible_ssh_user=tower
+ansible_ssh_user=hadoopuser
 ansible_become_user=root
 ansible_become_method=sudo
 ansible_python_interpreter=/usr/bin/python2.7
