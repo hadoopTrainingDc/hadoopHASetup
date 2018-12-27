@@ -35,7 +35,7 @@
         </property>
         <property>
                 <name>hbase.zookeeper.quorum</name>
-                <value>hb15.nuvex.com,hb16.nuvex.com,hb17.nuvex.com,hb18.nuvex.com</value>
+                <value>hb15,hb16,hb17,hb18</value>
         </property>
         <property>
                 <name>hbase.zookeeper.property.clientPort</name>
