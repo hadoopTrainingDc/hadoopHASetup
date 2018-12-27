@@ -43,23 +43,23 @@
         </property>
 	<property>
                 <name>dfs.namenode.rpc-address.ha-cluster.hb-15</name>
-                <value>hb15.nuvex.com:9000</value>
+                <value>hb15:9000</value>
         </property>
         <property>
                 <name>dfs.namenode.rpc-address.ha-cluster.hb-16</name>
-                <value>hb16.nuvex.com:9000</value>
+                <value>hb16:9000</value>
         </property>
         <property>
                 <name>dfs.namenode.http-address.ha-cluster.hb-15</name>
-                <value>hb15.nuvex.com:50070</value>
+                <value>hb15:50070</value>
         </property>
 	<property>
                 <name>dfs.namenode.http-address.ha-cluster.hb-16</name>
-                <value>hb16.nuvex.com:50070</value>
+                <value>hb16:50070</value>
         </property>
 	<property>
                 <name>dfs.namenode.shared.edits.dir</name>
-                <value>qjournal://hb15.nuvex.com:8485;hb16.nuvex.com:8485;hb17.nuvex.com:8485;hb18.nuvex.com:8485/ha-cluster</value>
+                <value>qjournal://hb15:8485;hb16:8485;hb17:8485;hb18:8485/ha-cluster</value>
         </property>
         <property>
                 <name>dfs.client.failover.proxy.provider.ha-cluster</name>
@@ -71,7 +71,7 @@
         </property>
         <property>
                 <name>ha.zookeeper.quorum</name>
-                <value>hb15.nuvex.com:2181,hb16.nuvex.com:2181,hb17.nuvex.com:2181,hb18.nuvex.com:2181</value>
+                <value>hb15:2181,hb16:2181,hb17:2181,hb18:2181</value>
         </property>
 	<property>
                 <name>dfs.ha.fencing.methods</name>
