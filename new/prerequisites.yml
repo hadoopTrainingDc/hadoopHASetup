@@ -29,3 +29,14 @@
   - name: Setting hostname
     hostname:
       name: '{{inventory_hostname }}'
+  - name: Set hostnames for neighbours
+    lineinfile:
+      path: /etc/hosts
+      state: present
+      line: '{{ item }}'
+    with_items:
+      - 192.168.1.65 hb15
+      - 192.168.1.66 hb16
+      - 192.168.1.67 hb17
+      - 192.168.1.68 hb18
+      
