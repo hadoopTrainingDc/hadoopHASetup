@@ -1,0 +1,16 @@
+---
+- name: Placing configuration files for cluster
+  hosts: hadoop
+  gather_facts: false
+  tasks:
+  - name: Hadoop conf
+    synchronize:
+      src:  './cf15-hadoop/{{ item }}'
+      dest: '~hadoopuser/HA/hadoop/etc/hadoop/{{ item }}'
+    with_items:
+      - core-site.xml
+      - hdfs-site.xml
+      - mapred-site.xml
+      - yarn-site.xml
+      - slaves
+      
