@@ -13,4 +13,10 @@
       - mapred-site.xml
       - yarn-site.xml
       - slaves
-      
+  - name: HBase conf
+    synchronize:
+      src:  './cf15-hbase/{{ item }}'
+      dest: '~hadoopuser/HA/hbase/conf/{{ item }}'
+    with_items:
+      - hbase-site.xml
+      - regionservers
