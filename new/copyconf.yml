@@ -20,3 +20,9 @@
     with_items:
       - hbase-site.xml
       - regionservers
+  - name: ZooKeeper conf
+    synchronize:
+      src:  './cf15-zk/{{ item }}'
+      dest: '~hadoopuser/HA/zookeeper/conf/{{ item }}'
+    with_items:
+      - zoo.cfg
