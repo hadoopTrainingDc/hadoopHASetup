@@ -2,7 +2,13 @@
 
 This document assumes that you already have clean CentOS 7 installed onto nodes. At least, we have :))
 
-1\. Create user for cluster management by executing command on each node:
+Before we start:
+
+- add all SSH keys you need to _user.sh_ script
+- change IPs so they match yours
+
+
+1\. Create user for cluster management by executing command on each node.
 
 `~# curl -sL https://raw.githubusercontent.com/hadoopTrainingDc/hadoopHASetup/master/user.sh | bash`
 
