@@ -1,8 +1,8 @@
 ### Cluster launch sequence
 
-This document assumes that you already have clean CentOS 7 installed. At least, we have :))
+This document assumes that you already have clean CentOS 7 installed onto nodes. At least, we have :))
 
-1\. Create user for cluster management
+1\. Create user for cluster management by executing command on each node:
 
 `~# curl -sL https://raw.githubusercontent.com/hadoopTrainingDc/hadoopHASetup/master/user.sh | bash`
 
