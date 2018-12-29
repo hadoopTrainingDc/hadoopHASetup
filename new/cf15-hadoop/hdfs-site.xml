@@ -39,22 +39,22 @@
         </property>
         <property>
                 <name>dfs.ha.namenodes.ha-cluster</name>
-                <value>hb-15,hb-16</value>
+                <value>hb15,hb16</value>
         </property>
 	<property>
-                <name>dfs.namenode.rpc-address.ha-cluster.hb-15</name>
+                <name>dfs.namenode.rpc-address.ha-cluster.hb15</name>
                 <value>hb15:9000</value>
         </property>
         <property>
-                <name>dfs.namenode.rpc-address.ha-cluster.hb-16</name>
+                <name>dfs.namenode.rpc-address.ha-cluster.hb16</name>
                 <value>hb16:9000</value>
         </property>
         <property>
-                <name>dfs.namenode.http-address.ha-cluster.hb-15</name>
+                <name>dfs.namenode.http-address.ha-cluster.hb15</name>
                 <value>hb15:50070</value>
         </property>
 	<property>
-                <name>dfs.namenode.http-address.ha-cluster.hb-16</name>
+                <name>dfs.namenode.http-address.ha-cluster.hb16</name>
                 <value>hb16:50070</value>
         </property>
 	<property>

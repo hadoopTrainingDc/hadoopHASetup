@@ -15,15 +15,15 @@
 <configuration>
 	<property>
     		<name>yarn.resourcemanager.address</name>
-    		<value>hb-15:8032</value>
+    		<value>hb15:8032</value>
   	</property>
   	<property>
     		<name>yarn.resourcemanager.scheduler.address</name>
-    		<value>hb-15:8030</value>
+    		<value>hb15:8030</value>
   	</property>
   	<property>
     		<name>yarn.resourcemanager.resource-tracker.address</name>
-    		<value>hb-15:8031</value>
+    		<value>hb15:8031</value>
   	</property>
 	<property>
 		<name>yarn.nodemanager.aux-services</name>
@@ -35,11 +35,11 @@
         </property>
 	<property>
     		<name>yarn.resourcemanager.admin.address</name>
-    		<value>hb-15:8033</value>
+    		<value>hb15:8033</value>
   	</property>
   	<property>
     		<name>yarn.resourcemanager.webapp.address</name>
-    		<value>hb-15:8088</value>
+    		<value>hb15:8088</value>
   	</property>
  	<property>
    		<name>yarn.nodemanager.vmem-check-enabled</name>

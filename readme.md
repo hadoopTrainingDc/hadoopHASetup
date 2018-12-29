@@ -6,6 +6,8 @@ Before we start:
 
 - add all SSH keys you need to _user.sh_ script
 - change IPs so they match yours
+- place distributives into _~/hadoop___distfiles/_ on management machine
+- generate/place keypair for __cluster user__ and for nodes interoperability into _~/nuvex.key/_ on management machine
 
 
 1\. Create user for cluster management by executing command on each node.

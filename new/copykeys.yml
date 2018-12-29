@@ -28,11 +28,7 @@
   - name: Scan nodes for public key
     shell: "ssh-keyscan {{ item }}"
     register: ssh_known_host_results
-    with_items:
-      - hb15
-      - hb16
-      - hb17
-      - hb18
+    with_items: "{{ groups['hadoop'] }}"
   - name: Update known_hosts
     known_hosts:
       name: "{{ item.item }}"
