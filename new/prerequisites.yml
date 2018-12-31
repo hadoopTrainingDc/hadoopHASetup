@@ -35,3 +35,8 @@
       state: present
       line: "{{ hostvars[item]['ansible_host'] }} {{ item }}"
     with_items: "{{ groups['hadoop'] }}"
+  - name: Disable firewall
+    service:
+      name: firewalld
+      enabled: false
+      state: stopped
