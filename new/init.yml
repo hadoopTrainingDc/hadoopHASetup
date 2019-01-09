@@ -1,0 +1,34 @@
+---
+- name: Initializing cluster
+  hosts: hadoop
+  gather_facts: false
+  tasks:
+  - name: Start Journal nodes
+    command: 'hadoop-daemon.sh start journalnode'
+    args:
+      creates: '/tmp/hadoop-hadoopuser-journalnode.pid'
+  - name: Zookeeper data folder
+    file:
+      path: ~hadoopuser/HA/data/zookeeper
+      state: directory
+      mode: 0775
+  - name: Set ZK quorum ID
+    command: "echo {{ groups['hadoop'].index(inventory_hostname)+1 }} > ~hadoopuser/HA/data/zookeeper/myid"
+    args:
+      creates: '~hadoopuser/HA/data/zookeeper/myid' 
+  - name: Start ZooKeeper nodes
+    command: 'zkServer.sh start'
+    args:
+      creates: '~hadoopuser/HA/data/zookeeper/zookeeper_server.pid'
+  - name: Format and clone Namenode, init ZKFC
+    command: "{{ item }} "
+    with_items:
+      - hdfs namenode -format
+      - start-dfs.sh
+      - ssh hb16 'hdfs namenode -bootstrapStandby'
+      - hdfs zkfc -formatZK
+      - stop-dfs.sh
+      - start-dfs.sh
+      - start-hbase.sh
+      - start-yarn.sh
+    when: inventory_hostname == 'hb15'

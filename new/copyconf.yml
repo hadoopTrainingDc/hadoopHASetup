@@ -20,6 +20,10 @@
     with_items:
       - hbase-site.xml
       - regionservers
+  - name: HBase keyfile
+    synchronize:
+      src:  '~/nuvex.key/hbase.jks'
+      dest: '~hadoopuser/HA/hbase/conf/hbase.jks'
   - name: ZooKeeper conf
     synchronize:
       src:  './cf15-zk/{{ item }}'

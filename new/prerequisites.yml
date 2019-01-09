@@ -12,9 +12,9 @@
     yum:
       name: rsync
       state: latest
-  - name: Installing Midnight Commander
+  - name: Installing Midnight Commander and telnet for easy diagnostic 
     yum:
-      name: mc
+      name: mc,telnet
       state: latest
   - name: Create --hadoopuser--
     user:

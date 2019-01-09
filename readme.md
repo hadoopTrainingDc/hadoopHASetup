@@ -7,7 +7,8 @@ Before we start:
 - add all SSH keys you need to _user.sh_ script
 - change IPs so they match yours
 - place distributives into _~/hadoop___distfiles/_ on management machine
-- generate/place keypair for __cluster user__ and for nodes interoperability into _~/nuvex.key/_ on management machine
+- generate/place keypair for __cluster user__ and for nodes interoperability into _~/nuvex.key/_ directory on management machine
+- put _hbase.jks_ file into _~/nuvex.key/_ directory too (excluded from repository for security reasons)
 
 
 1\. Create user for cluster management by executing command on each node.
@@ -21,8 +22,16 @@ Before we start:
 3\. Clone repository / copy its contents to management machine and `cd` into _clone-dir/new_.  
 4\. Play consequently:
 
-`~$ ansible -i hosts -m ping` to check that all nodes working, responding, accessible and ready.  
+`~$ ansible -i hosts -m ping all` to check that all nodes working, responding, accessible and ready.  
 `~$ ansible-playbook -i hosts prerequisites.yml` to prepare OS on nodes.  
 `~$ ansible-playbook -i hosts download.yml` to get Hadoop. Apache download center has daily limit, so tarballs are copied from local.  
 `~$ ansible-playbook -i hosts copykeys.yml` to distribute SSH key for cluster user to all nodes and to make nodes trust each other.  
-`~$ ansible-playbook -i hosts copyconf.yml` to place settings for Hadoop and its components to where they should be.  
+`~$ ansible-playbook -i hosts copyconf.yml` to place settings for Hadoop and its components to where they should be.
+
+5\. Init the cluster:
+
+- Start Journalnode on each host
+- Place ZK quorum marker and start zkServer on each host
+- format Namenode and bootstrap a standby NN
+- format ZK quorum
+- start dfs, yarn and hbase. 
