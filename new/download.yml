@@ -18,6 +18,7 @@
       - {name: 'hadoop-2.5.2', target: 'hadoop'}
       - {name: 'hbase-1.2.3-bin', target: 'hbase'}
       - {name: 'zookeeper-3.4.9', target: 'zookeeper'}
+      - {name: 'apache-hive-2.1.0-bin', target: 'hive'}
   - name: Rename dir
     command: 'mv ~hadoopuser/HA/{{ item.name }} ~hadoopuser/HA/{{ item.target }}'
     args:
@@ -26,6 +27,7 @@
       - {name: 'hadoop-2.5.2', target: 'hadoop'}
       - {name: 'hbase-1.2.3', target: 'hbase'}
       - {name: 'zookeeper-3.4.9', target: 'zookeeper'}
+      - {name: 'apache-hive-2.1.0-bin', target: 'hive'}
   - name: Clean downloaded
     file:
       path: '~hadoopuser/{{ item.name }}.tar.gz'
@@ -34,3 +36,4 @@
       - {name: 'hadoop-2.5.2', target: 'hadoop'}
       - {name: 'hbase-1.2.3-bin', target: 'hbase'}
       - {name: 'zookeeper-3.4.9', target: 'zookeeper'}
+      - {name: 'apache-hive-2.1.0-bin', target: 'hive'}
