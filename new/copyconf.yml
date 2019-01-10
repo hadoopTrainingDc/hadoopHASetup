@@ -24,6 +24,12 @@
     synchronize:
       src:  '~/nuvex.key/hbase.jks'
       dest: '~hadoopuser/HA/hbase/conf/hbase.jks'
+  - name: HBase use existing ZooKeeper
+    lineinfile:
+      path: ~hadoopuser/HA/hbase/conf/hbase-env.sh
+      regexp: HBASE_MANAGES_ZK
+      state: present
+      line: export HBASE_MANAGES_ZK=false
   - name: ZooKeeper conf
     synchronize:
       src:  './cf15-zk/{{ item }}'

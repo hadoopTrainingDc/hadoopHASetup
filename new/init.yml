@@ -32,7 +32,11 @@
       - ssh hb16 'hdfs namenode -bootstrapStandby'
       - hdfs zkfc -formatZK
       - stop-dfs.sh
-      - start-dfs.sh
-      - start-hbase.sh
-      - start-yarn.sh
+#      - start-dfs.sh
+#      - start-yarn.sh
+#      - start-hbase.sh
     when: inventory_hostname == 'hb15'
+  - name: Stop ZK
+    command: 'zkServer.sh stop'
+  - name: Stop JN
+    command: 'hadoop-daemon.sh stop journalnode'
