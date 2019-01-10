@@ -35,8 +35,25 @@
       state: present
       line: "{{ hostvars[item]['ansible_host'] }} {{ item }}"
     with_items: "{{ groups['hadoop'] }}"
-  - name: Disable firewall
+  - name: Enable firewall
     service:
       name: firewalld
-      enabled: false
-      state: stopped
+      enabled: true
+      state: started
+  - name: Add nodes to trusted network
+    firewalld:
+      source: "{{ hostvars[item]['ansible_host'] }}"
+      zone: trusted
+      state: enabled
+      permanent: true
+      immediate: true
+    with_items: "{{ groups['hadoop'] }}"
+  - name: Add trusted sources from outside of cluster
+    firewalld:
+      source: "{{ item }}"
+      zone: trusted
+      state: enabled
+      permanent: true
+      immediate: true
+    with_items:
+      - 192.168.1.0/24

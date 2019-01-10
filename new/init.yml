@@ -13,9 +13,13 @@
       state: directory
       mode: 0775
   - name: Set ZK quorum ID
-    command: "echo {{ groups['hadoop'].index(inventory_hostname)+1 }} > ~hadoopuser/HA/data/zookeeper/myid"
-    args:
-      creates: '~hadoopuser/HA/data/zookeeper/myid' 
+    command: "{{ item }} "
+    with_items:
+      - ssh hb15 'echo 1 > ~hadoopuser/HA/data/zookeeper/myid'
+      - ssh hb16 'echo 2 > ~hadoopuser/HA/data/zookeeper/myid'
+      - ssh hb17 'echo 3 > ~hadoopuser/HA/data/zookeeper/myid'
+      - ssh hb18 'echo 4 > ~hadoopuser/HA/data/zookeeper/myid'
+    when: inventory_hostname == 'hb15'
   - name: Start ZooKeeper nodes
     command: 'zkServer.sh start'
     args:
