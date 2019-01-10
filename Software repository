@@ -1,0 +1,4 @@
+wget https://archive.apache.org/dist/hive/hive-2.1.0/apache-hive-2.1.0-bin.tar.gz
+wget https://archive.apache.org/dist/hadoop/core/hadoop-2.5.2/hadoop-2.5.2.tar.gz
+wget https://archive.apache.org/dist/hbase/1.2.3/hbase-1.2.3-bin.tar.gz
+wget https://archive.apache.org/dist/zookeeper/zookeeper-3.4.9/zookeeper-3.4.9.tar.gz
