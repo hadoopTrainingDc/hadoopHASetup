@@ -5,8 +5,6 @@
   tasks:
   - name: Start ZooKeeper nodes
     command: 'zkServer.sh start'
-    args:
-      creates: '~hadoopuser/HA/data/zookeeper/zookeeper_server.pid'
   - name: Start cluster elements
     command: "{{ item }} "
     with_items:

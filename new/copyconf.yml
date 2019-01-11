@@ -36,3 +36,10 @@
       dest: '~hadoopuser/HA/zookeeper/conf/{{ item }}'
     with_items:
       - zoo.cfg
+  - name: Hive conf
+    synchronize:
+      src:  './cf15-hive/{{ item }}'
+      dest: '~hadoopuser/HA/hive/conf/{{ item }}'
+    with_items:
+      - hive-site.xml
+      
