@@ -73,6 +73,12 @@
                 <name>hbase.regionserver.wal.encryption</name>
                 <value>true</value>
         </property>
+	 <property>
+                <name>hbase.coprocessor.region.classes</name>
+                <value>com.nuvex.docdoc.PaymentObserver, com.nuvex.endpoints.NoAssistanceEndpoint, com.nuvex.endpoints.PaymentEndpoint</value>
+        <!--        <value>com.nuvex.docdoc.PaymentCoprocessor, com.nuvex.endpoints.NoAssistanceEndpoint</value>-->
+        <!--    <value>com.nuvex.docdoc.PaymentCoprocessor</value>-->
+        </property>
         <property>
                <name>hbase.regionserver.handler.count</name>
                <value>100</value>
