@@ -1,0 +1,12 @@
+[hadoop]
+hb25 ansible_host=116.203.54.228
+hb26 ansible_host=116.203.44.83
+hb27 ansible_host=116.203.55.102
+hb28 ansible_host=116.203.57.37
+
+[hadoop:vars]
+ansible_ssh_user=hadoopuser
+ansible_become_user=root
+ansible_become_method=sudo
+ansible_python_interpreter=/usr/bin/python2.7
+ansible_ssh_common_args='-o StrictHostKeyChecking=no'

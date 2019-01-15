@@ -1,0 +1,37 @@
+---
+- name: Distributing cluster keypair
+  hosts: hadoop
+  gather_facts: false
+  tasks:
+  - name: Create .ssh direcory
+    file:
+      path: ~hadoopuser/.ssh
+      state: directory
+      owner: hadoopuser
+      group: hadoopuser
+      mode:  0700
+  - name: Private key
+    copy:
+      src:  '~/nuvex.key/id_rsa'
+      dest: '~hadoopuser/.ssh/id_rsa'
+      mode: 0600
+  - name: Public key
+    copy:
+      src:  '~/nuvex.key/id_rsa.pub'
+      dest: '~hadoopuser/.ssh/id_rsa.pub'
+      mode: 0600
+  - name: Add auth key for users
+    authorized_key:
+      user: hadoopuser
+      state: present
+      key: "{{ lookup('file', '~/nuvex.key/id_rsa.pub') }}"
+  - name: Scan nodes for public key
+    shell: "ssh-keyscan {{ item }}"
+    register: ssh_known_host_results
+    with_items: "{{ groups['hadoop'] }}"
+  - name: Update known_hosts
+    known_hosts:
+      name: "{{ item.item }}"
+      key: "{{ item.stdout }}"
+      state: "present"
+    with_items: "{{ ssh_known_host_results.results }}"

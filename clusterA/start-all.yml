@@ -1,0 +1,14 @@
+---
+- name: Starting up cluster
+  hosts: hadoop
+  gather_facts: false
+  tasks:
+  - name: Start ZooKeeper nodes
+    command: 'zkServer.sh start'
+  - name: Start cluster elements
+    command: "{{ item }} "
+    with_items:
+      - start-dfs.sh
+      - start-yarn.sh
+      - start-hbase.sh
+    when: inventory_hostname == 'hb25'

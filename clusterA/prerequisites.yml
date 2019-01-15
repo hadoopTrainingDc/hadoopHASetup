@@ -1,0 +1,73 @@
+---
+- name: Installing prerequisites for HADOOP
+  hosts: hadoop
+  become: true
+  gather_facts: false
+  tasks:
+  - name: Installing Java
+    yum:
+      name: java-1.8.0,java-1.8.0-openjdk-devel
+      state: latest
+  - name: Installing rsync and firewalld, if not exists
+    yum:
+      name: rsync,firewalld
+      state: latest
+  - name: Installing Midnight Commander and telnet for easy diagnostic 
+    yum:
+      name: mc,telnet
+      state: latest
+  - name: Create --hadoopuser--
+    user:
+      name: hadoopuser
+      shell: '/usr/bin/bash'
+      password: $1$abC$bnHkUrTarL4ffXu4Hu9Y1.
+      create_home: yes
+  - name: Setting env vars script
+    synchronize:
+      src:  'hadoop-env.sh'
+      dest: '/etc/profile.d/hadoop-env.sh'
+  - name: Setting hostname
+    hostname:
+      name: '{{inventory_hostname }}'
+  - name: Set hostnames for neighbours
+    lineinfile:
+      path: /etc/hosts
+      state: present
+      line: "{{ hostvars[item]['ansible_host'] }} {{ item }}"
+    with_items: "{{ groups['hadoop'] }}"
+  - name: Enable firewall
+    service:
+      name: firewalld
+      enabled: true
+      state: started
+  - name: Add nodes to trusted network
+    firewalld:
+      source: "{{ hostvars[item]['ansible_host'] }}"
+      zone: trusted
+      state: enabled
+      permanent: true
+      immediate: true
+    with_items: "{{ groups['hadoop'] }}"
+  - name: Add trusted sources from outside of cluster
+    firewalld:
+      source: "{{ item }}"
+      zone: trusted
+      state: enabled
+      permanent: true
+      immediate: true
+    with_items:
+      - 142.93.17.221
+      - 167.99.99.33
+      - 142.93.30.80
+      - 159.65.100.6
+  - name: Set hostnames for another cluster
+    lineinfile:
+      path: /etc/hosts
+      state: present
+      line: "{{ item.address }} {{ item.name }}"
+    with_items:
+      - {name: 'hb15', address: '142.93.17.221'}
+      - {name: 'hb16', address: '167.99.99.33'}
+      - {name: 'hb17', address: '142.93.30.80'}
+      - {name: 'hb18', address: '159.65.100.6'}
+      
